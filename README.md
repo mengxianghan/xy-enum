@@ -37,19 +37,19 @@ myEnum.get('key1')
 myEnum.get(1)
 // 输出 {key: 'key1', value: '1', desc: 'this is key1'}
 
-myEnum.getKey('key1')
+myEnum.getKey('key1'[, 'def'])
 // or
-myEnum.getKey(1)
+myEnum.getKey(1[, 'def'])
 // 输出 key1
 
-myEnum.getValue('key1')
+myEnum.getValue('key1'[, 'def'])
 // or
-myEnum.getValue(1)
+myEnum.getValue(1[, 'def'])
 // 输出 1
 
-myEnum.getDesc('key1')
+myEnum.getDesc('key1'[, 'def'])
 // or
-myEnum.getDesc(1)
+myEnum.getDesc(1[, 'def'])
 // 输出 this is key1
 
 myEnum.getOptions()
