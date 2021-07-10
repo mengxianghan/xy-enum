@@ -75,6 +75,7 @@ myEnum.is(1, 1)
 
 ```
 
-## Options
-
-fields: 替换 Enum 中 key,value,desc 字段为 Enum 对应的字段，默认：{key: 'key', value: 'value', desc: 'desc'}
+## API
+| 名称 | 必填 | 说明 |
+|:----|:----|:----|
+| fields | 否 | 替换 Enum 中 key,value,desc 字段为 Enum 对应的字段，默认：{key: 'key', value: 'value', desc: 'desc'} |
