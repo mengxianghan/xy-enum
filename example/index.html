@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Enum</title>
+    <title>example</title>
 </head>
+
 <body>
-<script src="../dist/index.umd.js"></script>
-<script>
-    const myEnum = new Enum([
-        {key: 'a', value: 1, desc: 'this is a'},
-        {key: 'b', value: 2, desc: 'this is b'}
-    ])
-</script>
+    <script src="../dist/index.umd.min.js"></script>
+    <script>
+        const myEnum = new Enum([
+            { key: 'a', value: 1, desc: 'this is a', extra: {key: 'a-key', value: 'a-value'} },
+            { key: 'b', value: 2, desc: 'this is b', extra: 'this is b of extra' }
+        ])
+        const data = myEnum.get('a')
+        const key = myEnum.getKey('a')
+        const value = myEnum.getValue('a')
+        const desc = myEnum.getDesc('a')
+        const extra = myEnum.getExtra('a')
+
+        console.log('data:', data)
+        console.log('key:', key)
+        console.log('value:', value)
+        console.log('desc:', desc)
+        console.log('extra:', extra)
+    </script>
 </body>
+
 </html>

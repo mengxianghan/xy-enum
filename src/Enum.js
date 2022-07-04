@@ -1,17 +1,23 @@
 export default class Enum {
+    #opts
+    #enumMap
+
     constructor(map, options) {
-        this._opts = {
+        this.#opts = {
             fields: {
                 key: 'key',
                 value: 'value',
-                desc: 'desc'
+                desc: 'desc',
+                extra: 'extra',
             },
-            ...options
+            ...options,
         }
-        this._enumMap = map.map(item => ({
-            key: item[this._opts.fields?.key],
-            value: item[this._opts.fields?.value],
-            desc: item[this._opts.fields?.desc]
+
+        this.#enumMap = map.map((item) => ({
+            key: item[this.#opts.fields?.key],
+            value: item[this.#opts.fields?.value],
+            desc: item[this.#opts.fields?.desc],
+            extra: item[this.#opts.fields?.extra],
         }))
     }
 
@@ -19,7 +25,7 @@ export default class Enum {
      * 获取对象
      */
     get(key) {
-        return this._enumMap.find((v) => v.key === key || v.value === key)
+        return this.#enumMap.find((v) => v.key === key || v.value === key)
     }
 
     /**
@@ -53,12 +59,22 @@ export default class Enum {
     }
 
     /**
+     * 获取 extra
+     * @param {*} key
+     * @param {*} def
+     * @returns
+     */
+    getExtra(key, def = null) {
+        return this.get(key)?.extra ?? def
+    }
+
+    /**
      * 获取所有
      * 使用场景：checkbox，radio，select
      */
-    getOptions(fields = {label: 'desc', value: 'value'}) {
+    getOptions(fields = { label: 'desc', value: 'value' }) {
         const keys = Object.keys(fields)
-        return this._enumMap.map(item => {
+        return this.#enumMap.map((item) => {
             const record = {}
             for (let key of keys) {
                 record[key] = item[fields[key]]
@@ -71,7 +87,7 @@ export default class Enum {
      * 检查
      */
     has(key) {
-        return this._enumMap.some(v => v.key === key || v.value === key)
+        return this.#enumMap.some((v) => v.key === key || v.value === key)
     }
 
     /**
