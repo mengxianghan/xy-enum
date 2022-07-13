@@ -1,6 +1,9 @@
 export default class Enum {
+    #opts
+    #enumMap
+
     constructor(map, options) {
-        this._opts = {
+        this.#opts = {
             fields: {
                 key: 'key',
                 value: 'value',
@@ -10,11 +13,11 @@ export default class Enum {
             ...options,
         }
 
-        this._enumMap = map.map((item) => ({
-            key: item[this._opts.fields?.key],
-            value: item[this._opts.fields?.value],
-            desc: item[this._opts.fields?.desc],
-            extra: item[this._opts.fields?.extra],
+        this.#enumMap = map.map((item) => ({
+            key: item[this.#opts.fields?.key],
+            value: item[this.#opts.fields?.value],
+            desc: item[this.#opts.fields?.desc],
+            extra: item[this.#opts.fields?.extra],
         }))
     }
 
@@ -22,7 +25,7 @@ export default class Enum {
      * 获取对象
      */
     get(key) {
-        return this._enumMap.find((v) => v.key === key || v.value === key)
+        return this.#enumMap.find((v) => v.key === key || v.value === key)
     }
 
     /**
@@ -71,7 +74,7 @@ export default class Enum {
      */
     getOptions(fields = { label: 'desc', value: 'value' }) {
         const keys = Object.keys(fields)
-        return this._enumMap.map((item) => {
+        return this.#enumMap.map((item) => {
             const record = {}
             for (let key of keys) {
                 record[key] = item[fields[key]]
@@ -84,7 +87,7 @@ export default class Enum {
      * 检查
      */
     has(key) {
-        return this._enumMap.some((v) => v.key === key || v.value === key)
+        return this.#enumMap.some((v) => v.key === key || v.value === key)
     }
 
     /**
