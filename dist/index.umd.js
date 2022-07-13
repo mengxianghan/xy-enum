@@ -5,11 +5,8 @@
 })(this, (function () { 'use strict';
 
     class Enum {
-      #opts;
-      #enumMap;
-
       constructor(map, options) {
-        this.#opts = {
+        this._opts = {
           fields: {
             key: 'key',
             value: 'value',
@@ -18,11 +15,11 @@
           },
           ...options
         };
-        this.#enumMap = map.map(item => ({
-          key: item[this.#opts.fields?.key],
-          value: item[this.#opts.fields?.value],
-          desc: item[this.#opts.fields?.desc],
-          extra: item[this.#opts.fields?.extra]
+        this._enumMap = map.map(item => ({
+          key: item[this._opts.fields?.key],
+          value: item[this._opts.fields?.value],
+          desc: item[this._opts.fields?.desc],
+          extra: item[this._opts.fields?.extra]
         }));
       }
       /**
@@ -31,7 +28,7 @@
 
 
       get(key) {
-        return this.#enumMap.find(v => v.key === key || v.value === key);
+        return this._enumMap.find(v => v.key === key || v.value === key);
       }
       /**
        * 获取 key
@@ -88,7 +85,7 @@
         value: 'value'
       }) {
         const keys = Object.keys(fields);
-        return this.#enumMap.map(item => {
+        return this._enumMap.map(item => {
           const record = {};
 
           for (let key of keys) {
@@ -104,7 +101,7 @@
 
 
       has(key) {
-        return this.#enumMap.some(v => v.key === key || v.value === key);
+        return this._enumMap.some(v => v.key === key || v.value === key);
       }
       /**
        * 对比
