@@ -69,7 +69,7 @@ export default class Enum {
     }
 
     /**
-     * 获取所有
+     * 获取数据作为选项使用
      * 使用场景：checkbox，radio，select
      */
     getOptions(fields = { label: 'desc', value: 'value' }) {
@@ -84,6 +84,13 @@ export default class Enum {
     }
 
     /**
+     * 获取列表
+     */
+    getList() {
+        return this.#enumMap
+    }
+
+    /**
      * 检查
      */
     has(key) {
@@ -94,6 +101,14 @@ export default class Enum {
      * 对比
      */
     is(key, value) {
-        return this.getKey(key) === value || this.getValue(key) === value
+        const list = []
+        if (Array.isArray(key)) {
+            key.forEach(item=>{
+                list.push(...[this.getKey(item), this.getValue(item)])
+            })
+        } else {
+            list.push(...[this.getKey(key), this.getValue(key)])
+        }
+        return list.includes(value)
     }
 }

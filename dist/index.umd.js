@@ -311,7 +311,7 @@
         return (_this$get$extra = (_this$get4 = this.get(key)) === null || _this$get4 === void 0 ? void 0 : _this$get4.extra) !== null && _this$get$extra !== void 0 ? _this$get$extra : def;
       }
       /**
-       * 获取所有
+       * 获取数据作为选项使用
        * 使用场景：checkbox，radio，select
        */
 
@@ -344,6 +344,15 @@
         });
       }
       /**
+       * 获取列表
+       */
+
+    }, {
+      key: "getList",
+      value: function getList() {
+        return _classPrivateFieldGet(this, _enumMap);
+      }
+      /**
        * 检查
        */
 
@@ -361,7 +370,19 @@
     }, {
       key: "is",
       value: function is(key, value) {
-        return this.getKey(key) === value || this.getValue(key) === value;
+        var _this2 = this;
+
+        var list = [];
+
+        if (Array.isArray(key)) {
+          key.forEach(function (item) {
+            list.push.apply(list, [_this2.getKey(item), _this2.getValue(item)]);
+          });
+        } else {
+          list.push.apply(list, [this.getKey(key), this.getValue(key)]);
+        }
+
+        return list.includes(value);
       }
     }]);
 
