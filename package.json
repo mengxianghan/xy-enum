@@ -1,6 +1,6 @@
 {
     "name": "xy-enum",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "description": "枚举",
     "main": "dist/index.umd.min.js",
     "browser": "dist/index.umd.min.js",
