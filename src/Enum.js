@@ -13,6 +13,7 @@ export default class Enum {
         }
 
         this.#enumMap = map.map((item) => ({
+            ...item,
             key: item[this.#opts.fieldNames?.key],
             value: item[this.#opts.fieldNames?.value],
             desc: item[this.#opts.fieldNames?.desc],
