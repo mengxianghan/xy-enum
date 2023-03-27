@@ -4,7 +4,7 @@ export default class Enum {
 
     constructor(map, options) {
         this.#opts = {
-            fields: {
+            fieldNames: {
                 key: 'key',
                 value: 'value',
                 desc: 'desc',
@@ -13,9 +13,9 @@ export default class Enum {
         }
 
         this.#enumMap = map.map((item) => ({
-            key: item[this.#opts.fields?.key],
-            value: item[this.#opts.fields?.value],
-            desc: item[this.#opts.fields?.desc],
+            key: item[this.#opts.fieldNames?.key],
+            value: item[this.#opts.fieldNames?.value],
+            desc: item[this.#opts.fieldNames?.desc],
         }))
     }
 
@@ -60,12 +60,12 @@ export default class Enum {
      * 获取数据作为选项使用
      * 使用场景：checkbox，radio，select
      */
-    getOptions(fields = { label: 'desc', value: 'value' }) {
-        const keys = Object.keys(fields)
+    getOptions(fieldNames = { label: 'desc', value: 'value' }) {
+        const keys = Object.keys(fieldNames)
         return this.#enumMap.map((item) => {
             const record = {}
             for (let key of keys) {
-                record[key] = item[fields[key]]
+                record[key] = item[fieldNames[key]]
             }
             return record
         })
