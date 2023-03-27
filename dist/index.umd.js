@@ -219,23 +219,21 @@
       });
 
       _classPrivateFieldSet(this, _opts, _objectSpread2({
-        fields: {
+        fieldNames: {
           key: 'key',
           value: 'value',
-          desc: 'desc',
-          extra: 'extra'
+          desc: 'desc'
         }
       }, options));
 
       _classPrivateFieldSet(this, _enumMap, map.map(function (item) {
-        var _classPrivateFieldGet2, _classPrivateFieldGet3, _classPrivateFieldGet4, _classPrivateFieldGet5;
+        var _classPrivateFieldGet2, _classPrivateFieldGet3, _classPrivateFieldGet4;
 
-        return {
-          key: item[(_classPrivateFieldGet2 = _classPrivateFieldGet(_this, _opts).fields) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.key],
-          value: item[(_classPrivateFieldGet3 = _classPrivateFieldGet(_this, _opts).fields) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.value],
-          desc: item[(_classPrivateFieldGet4 = _classPrivateFieldGet(_this, _opts).fields) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.desc],
-          extra: item[(_classPrivateFieldGet5 = _classPrivateFieldGet(_this, _opts).fields) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.extra]
-        };
+        return _objectSpread2(_objectSpread2({}, item), {}, {
+          key: item[(_classPrivateFieldGet2 = _classPrivateFieldGet(_this, _opts).fieldNames) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.key],
+          value: item[(_classPrivateFieldGet3 = _classPrivateFieldGet(_this, _opts).fieldNames) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.value],
+          desc: item[(_classPrivateFieldGet4 = _classPrivateFieldGet(_this, _opts).fieldNames) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.desc]
+        });
       }));
     }
     /**
@@ -296,21 +294,6 @@
         return (_this$get$desc = (_this$get3 = this.get(key)) === null || _this$get3 === void 0 ? void 0 : _this$get3.desc) !== null && _this$get$desc !== void 0 ? _this$get$desc : def;
       }
       /**
-       * 获取 extra
-       * @param {*} key
-       * @param {*} def
-       * @returns
-       */
-
-    }, {
-      key: "getExtra",
-      value: function getExtra(key) {
-        var _this$get$extra, _this$get4;
-
-        var def = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-        return (_this$get$extra = (_this$get4 = this.get(key)) === null || _this$get4 === void 0 ? void 0 : _this$get4.extra) !== null && _this$get$extra !== void 0 ? _this$get$extra : def;
-      }
-      /**
        * 获取数据作为选项使用
        * 使用场景：checkbox，radio，select
        */
@@ -318,11 +301,11 @@
     }, {
       key: "getOptions",
       value: function getOptions() {
-        var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+        var fieldNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
           label: 'desc',
           value: 'value'
         };
-        var keys = Object.keys(fields);
+        var keys = Object.keys(fieldNames);
         return _classPrivateFieldGet(this, _enumMap).map(function (item) {
           var record = {};
 
@@ -332,7 +315,7 @@
           try {
             for (_iterator.s(); !(_step = _iterator.n()).done;) {
               var key = _step.value;
-              record[key] = item[fields[key]];
+              record[key] = item[fieldNames[key]];
             }
           } catch (err) {
             _iterator.e(err);
