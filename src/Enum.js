@@ -8,7 +8,6 @@ export default class Enum {
                 key: 'key',
                 value: 'value',
                 desc: 'desc',
-                extra: 'extra',
             },
             ...options,
         }
@@ -17,7 +16,6 @@ export default class Enum {
             key: item[this.#opts.fields?.key],
             value: item[this.#opts.fields?.value],
             desc: item[this.#opts.fields?.desc],
-            extra: item[this.#opts.fields?.extra],
         }))
     }
 
@@ -59,16 +57,6 @@ export default class Enum {
     }
 
     /**
-     * 获取 extra
-     * @param {*} key
-     * @param {*} def
-     * @returns
-     */
-    getExtra(key, def = null) {
-        return this.get(key)?.extra ?? def
-    }
-
-    /**
      * 获取数据作为选项使用
      * 使用场景：checkbox，radio，select
      */
@@ -103,7 +91,7 @@ export default class Enum {
     is(key, value) {
         const list = []
         if (Array.isArray(key)) {
-            key.forEach(item=>{
+            key.forEach((item) => {
                 list.push(...[this.getKey(item), this.getValue(item)])
             })
         } else {
