@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Enum = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.XYEnum = factory());
 })(this, (function () { 'use strict';
 
   function ownKeys(object, enumerableOnly) {
@@ -198,132 +198,126 @@
     privateMap.set(obj, value);
   }
 
+  /**
+   * 是否为空
+   * @param {*} val 
+   * @returns 
+   */
+
+  var isEmpty = function isEmpty(val) {
+    return val === null || val === undefined || val === '';
+  };
+
   var _opts = /*#__PURE__*/new WeakMap();
 
-  var _enumMap = /*#__PURE__*/new WeakMap();
+  var _list = /*#__PURE__*/new WeakMap();
 
-  var Enum = /*#__PURE__*/function () {
-    function Enum(map, options) {
-      var _this = this;
-
-      _classCallCheck(this, Enum);
+  var XYEnum = /*#__PURE__*/function () {
+    function XYEnum(data, options) {
+      _classCallCheck(this, XYEnum);
 
       _classPrivateFieldInitSpec(this, _opts, {
         writable: true,
         value: void 0
       });
 
-      _classPrivateFieldInitSpec(this, _enumMap, {
+      _classPrivateFieldInitSpec(this, _list, {
         writable: true,
         value: void 0
       });
 
       _classPrivateFieldSet(this, _opts, _objectSpread2({
-        fields: {
+        fieldNames: {
           key: 'key',
           value: 'value',
-          desc: 'desc',
-          extra: 'extra'
+          desc: 'desc'
         }
       }, options));
 
-      _classPrivateFieldSet(this, _enumMap, map.map(function (item) {
-        var _classPrivateFieldGet2, _classPrivateFieldGet3, _classPrivateFieldGet4, _classPrivateFieldGet5;
-
-        return {
-          key: item[(_classPrivateFieldGet2 = _classPrivateFieldGet(_this, _opts).fields) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.key],
-          value: item[(_classPrivateFieldGet3 = _classPrivateFieldGet(_this, _opts).fields) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.value],
-          desc: item[(_classPrivateFieldGet4 = _classPrivateFieldGet(_this, _opts).fields) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.desc],
-          extra: item[(_classPrivateFieldGet5 = _classPrivateFieldGet(_this, _opts).fields) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.extra]
-        };
-      }));
+      _classPrivateFieldSet(this, _list, data);
     }
     /**
      * 获取对象
+     * @param {string|number} val
      */
 
 
-    _createClass(Enum, [{
+    _createClass(XYEnum, [{
       key: "get",
-      value: function get(key) {
-        return _classPrivateFieldGet(this, _enumMap).find(function (v) {
-          return v.key === key || v.value === key;
+      value: function get(val) {
+        var _this = this;
+
+        return _classPrivateFieldGet(this, _list).find(function (item) {
+          return item[_classPrivateFieldGet(_this, _opts).fieldNames.key] === val || item[_classPrivateFieldGet(_this, _opts).fieldNames.value] === val;
         });
       }
       /**
        * 获取 key
-       * @param key
-       * @param def
+       * @param {string|number} val
+       * @param {*} def 默认值，获取不到任何内容时返回
        * @return {*}
        */
 
     }, {
       key: "getKey",
-      value: function getKey(key) {
-        var _this$get$key, _this$get;
+      value: function getKey(val) {
+        var _this$get, _classPrivateFieldGet2;
 
         var def = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-        return (_this$get$key = (_this$get = this.get(key)) === null || _this$get === void 0 ? void 0 : _this$get.key) !== null && _this$get$key !== void 0 ? _this$get$key : def;
+        var content = (_this$get = this.get(val)) === null || _this$get === void 0 ? void 0 : _this$get[(_classPrivateFieldGet2 = _classPrivateFieldGet(this, _opts).fieldNames) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.key];
+        return !isEmpty(content) ? content : def;
       }
       /**
        * 获取 value
-       * @param key
-       * @param def
+       * @param {string|number} val
+       * @param {*} def 默认值，获取不到任何内容时返回
        * @return {*}
        */
 
     }, {
       key: "getValue",
-      value: function getValue(key) {
-        var _this$get$value, _this$get2;
+      value: function getValue(val) {
+        var _this$get2, _classPrivateFieldGet3;
 
         var def = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-        return (_this$get$value = (_this$get2 = this.get(key)) === null || _this$get2 === void 0 ? void 0 : _this$get2.value) !== null && _this$get$value !== void 0 ? _this$get$value : def;
+        var content = (_this$get2 = this.get(val)) === null || _this$get2 === void 0 ? void 0 : _this$get2[(_classPrivateFieldGet3 = _classPrivateFieldGet(this, _opts).fieldNames) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.value];
+        return !isEmpty(content) ? content : def;
       }
       /**
        * 获取 desc
-       * @param key
-       * @param def
+       * @param {string|number} val
+       * @param {*} def 默认值，获取不到任何内容时返回
        * @return {*}
        */
 
     }, {
       key: "getDesc",
-      value: function getDesc(key) {
-        var _this$get$desc, _this$get3;
+      value: function getDesc(val) {
+        var _this$get3, _classPrivateFieldGet4;
 
         var def = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-        return (_this$get$desc = (_this$get3 = this.get(key)) === null || _this$get3 === void 0 ? void 0 : _this$get3.desc) !== null && _this$get$desc !== void 0 ? _this$get$desc : def;
+        var content = (_this$get3 = this.get(val)) === null || _this$get3 === void 0 ? void 0 : _this$get3[(_classPrivateFieldGet4 = _classPrivateFieldGet(this, _opts).fieldNames) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.desc];
+        return !isEmpty(content) ? content : def;
       }
       /**
-       * 获取 extra
-       * @param {*} key
-       * @param {*} def
-       * @returns
-       */
-
-    }, {
-      key: "getExtra",
-      value: function getExtra(key) {
-        var _this$get$extra, _this$get4;
-
-        var def = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-        return (_this$get$extra = (_this$get4 = this.get(key)) === null || _this$get4 === void 0 ? void 0 : _this$get4.extra) !== null && _this$get$extra !== void 0 ? _this$get$extra : def;
-      }
-      /**
-       * 获取所有
-       * 使用场景：checkbox，radio，select
+       * 获取选项列表
+       * 获取到的内容适用于 checkbox，radio，select 组件
+       * @param {object} fieldNames 自定义节点 label、value 的字段
+       * @param {string} fieldNames.label
+       * @param {string} fieldNames.value
        */
 
     }, {
       key: "getOptions",
       value: function getOptions() {
-        var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-          label: 'desc',
-          value: 'value'
+        var _classPrivateFieldGet5, _classPrivateFieldGet6;
+
+        var fieldNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+          label: (_classPrivateFieldGet5 = _classPrivateFieldGet(this, _opts).fieldNames) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.desc,
+          value: (_classPrivateFieldGet6 = _classPrivateFieldGet(this, _opts).fieldNames) === null || _classPrivateFieldGet6 === void 0 ? void 0 : _classPrivateFieldGet6.value
         };
-        var keys = Object.keys(fields);
-        return _classPrivateFieldGet(this, _enumMap).map(function (item) {
+        var keys = Object.keys(fieldNames);
+        return _classPrivateFieldGet(this, _list).map(function (item) {
           var record = {};
 
           var _iterator = _createForOfIteratorHelper(keys),
@@ -332,7 +326,7 @@
           try {
             for (_iterator.s(); !(_step = _iterator.n()).done;) {
               var key = _step.value;
-              record[key] = item[fields[key]];
+              record[key] = item[fieldNames[key]];
             }
           } catch (err) {
             _iterator.e(err);
@@ -344,30 +338,58 @@
         });
       }
       /**
-       * 检查
+       * 获取列表
+       */
+
+    }, {
+      key: "getList",
+      value: function getList() {
+        return _classPrivateFieldGet(this, _list);
+      }
+      /**
+       * 检查是否存在
+       * @params {string|number} val
        */
 
     }, {
       key: "has",
-      value: function has(key) {
-        return _classPrivateFieldGet(this, _enumMap).some(function (v) {
-          return v.key === key || v.value === key;
+      value: function has(val) {
+        var _this2 = this;
+
+        return _classPrivateFieldGet(this, _list).some(function (item) {
+          var _classPrivateFieldGet7, _classPrivateFieldGet8, _classPrivateFieldGet9;
+
+          return item[(_classPrivateFieldGet7 = _classPrivateFieldGet(_this2, _opts).fieldNames) === null || _classPrivateFieldGet7 === void 0 ? void 0 : _classPrivateFieldGet7[(_classPrivateFieldGet8 = _classPrivateFieldGet(_this2, _opts).fieldNames) === null || _classPrivateFieldGet8 === void 0 ? void 0 : _classPrivateFieldGet8.key]] === val || item[(_classPrivateFieldGet9 = _classPrivateFieldGet(_this2, _opts).fieldNames) === null || _classPrivateFieldGet9 === void 0 ? void 0 : _classPrivateFieldGet9.value] === val;
         });
       }
       /**
-       * 对比
+       * 是否相等
+       * @param {string|number} val
+       * @param {string|number} value
        */
 
     }, {
       key: "is",
-      value: function is(key, value) {
-        return this.getKey(key) === value || this.getValue(key) === value;
+      value: function is(val, value) {
+        var _this3 = this;
+
+        var list = [];
+
+        if (Array.isArray(val)) {
+          val.forEach(function (item) {
+            list.push.apply(list, [_this3.getKey(item), _this3.getValue(item)]);
+          });
+        } else {
+          list.push.apply(list, [this.getKey(val), this.getValue(val)]);
+        }
+
+        return list.includes(value);
       }
     }]);
 
-    return Enum;
+    return XYEnum;
   }();
 
-  return Enum;
+  return XYEnum;
 
 }));
