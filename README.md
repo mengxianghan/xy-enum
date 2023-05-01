@@ -10,7 +10,7 @@
 ### NPM
 
 ```shell
-npm instll xy-enum --save
+npm install xy-enum -S
 ```
 
 ## 使用
@@ -19,7 +19,7 @@ npm instll xy-enum --save
 import Enum from 'xy-enum'
 
 const options = {
-    fields: {
+    fieldNames: {
         key: 'key',
         value: 'value',
         desc: 'desc'
@@ -59,6 +59,10 @@ myEnum.getOptions()
 myEnum.getOptions({name: 'desc', id: 'value'})
 // 输出 [{name: 'this is key1', id: 1}, {name: 'this is key2', id: 2}, ...]
 
+// 全部列表
+myEnum.getList()
+// 输出 [{key: 'key1', value: 1, desc: 'this is key1'},{key: 'key2', value: 2, desc: 'this is key2'},{key: 'key3', value: 3, desc: 'this is key3'}]
+
 myEnum.has('key1')
 // or
 myEnum.has(1)
@@ -71,6 +75,8 @@ myEnum.is('key1', 'key1')
 myEnum.is(1, 'key1')
 // or
 myEnum.is(1, 1)
+// or
+myEnum.is(['key1', 'key2'], 1)
 // 输出 true
 
 ```
@@ -78,4 +84,4 @@ myEnum.is(1, 1)
 ## API
 | 名称 | 必填 | 说明 |
 |:----|:----|:----|
-| fields | 否 | 替换 Enum 中 key,value,desc 字段为 Enum 对应的字段，默认：{key: 'key', value: 'value', desc: 'desc'} |
+| fieldNames | 否 | 替换 Enum 中 key,value,desc 字段为 Enum 对应的字段，默认：{key: 'key', value: 'value', desc: 'desc'} |
