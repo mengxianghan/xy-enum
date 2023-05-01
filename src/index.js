@@ -1,3 +1,3 @@
-import XYEnum from './xyenum'
+import Enum from './enum'
 
-export default XYEnum
+export default Enum

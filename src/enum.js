@@ -1,6 +1,6 @@
 import { isEmpty } from './utils/is'
 
-class XYEnum {
+class Enum {
     #opts
     #list
 
@@ -115,4 +115,4 @@ class XYEnum {
     }
 }
 
-export default XYEnum
+export default Enum
