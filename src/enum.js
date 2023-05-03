@@ -1,6 +1,6 @@
 import { isEmpty } from './utils/is'
 
-class Enum {
+export default class Enum {
     #opts
     #list
 
@@ -114,5 +114,3 @@ class Enum {
         return list.includes(value)
     }
 }
-
-export default Enum
