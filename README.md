@@ -1,87 +1,127 @@
+# XYEnum 枚举
+
 ## 安装
 
-### CDN
-
-```html
-
-<script src="https://cdn.jsdelivr.net/npm/xy-enum@{version}/dist/index.umd.min.js"></script>
-```
-
-### NPM
+使用 npm：
 
 ```shell
 npm install xy-enum -S
 ```
 
-## 使用
+使用 jsDelivr CDN：
 
-```javascript
-import Enum from 'xy-enum'
+```html
 
-const options = {
-    fieldNames: {
-        key: 'key',
-        value: 'value',
-        desc: 'desc'
-    }
-}
+<script src="https://cdn.jsdelivr.net/npm/xy-enum/dist/index.min.js"></script>
+```
 
-const myEnum = new Enum([
-    {key: 'key1', value: 1, desc: 'this is key1'},
-    {key: 'key2', value: 2, desc: 'this is key2'},
-    {key: 'key3', value: 3, desc: 'this is key3'}
-], options)
+## 示例
 
-myEnum.get('key1')
-// or
-myEnum.get(1)
-// 输出 {key: 'key1', value: '1', desc: 'this is key1'}
+### 基础用法
 
-myEnum.getKey('key1'[, 'def'])
-// or
-myEnum.getKey(1[, 'def'])
-// 输出 key1
+```js
+import XYEnum from "xy-enum";
 
-myEnum.getValue('key1'[, 'def'])
-// or
-myEnum.getValue(1[, 'def'])
-// 输出 1
+const myEnum = new XYEnum([
+  { key: "key1", value: 1, desc: "选项1" },
+  { key: "key2", value: 2, desc: "选项2" },
+  { key: "key3", value: 3, desc: "选项3" },
+  { key: "key4", value: 4, desc: "选项4" }
+]);
 
-myEnum.getDesc('key1'[, 'def'])
-// or
-myEnum.getDesc(1[, 'def'])
-// 输出 this is key1
+// 通过 value 获取 key
+myEnum.getKey("key1");
 
-myEnum.getOptions()
-// 输出 [{label: 'this is key1', value: 1}, {label: 'this is key2', value: 2}, ...]
+// 通过 key 获取 value
+myEnum.getValue(1);
 
-// 自定义字段名
-myEnum.getOptions({name: 'desc', id: 'value'})
-// 输出 [{name: 'this is key1', id: 1}, {name: 'this is key2', id: 2}, ...]
+// 通过 key 获取 desc
+myEnum.getDesc("key1");
 
-// 全部列表
-myEnum.getList()
-// 输出 [{key: 'key1', value: 1, desc: 'this is key1'},{key: 'key2', value: 2, desc: 'this is key2'},{key: 'key3', value: 3, desc: 'this is key3'}]
+// 通过 value 获取 desc
+myEnum.getDesc(1);
 
-myEnum.has('key1')
-// or
-myEnum.has(1)
-// 输出 true
+// 通过 key 获取 record
+myEnum.get(1);
 
-myEnum.is('key1', 1)
-// or
-myEnum.is('key1', 'key1')
-// or
-myEnum.is(1, 'key1')
-// or
-myEnum.is(1, 1)
-// or
-myEnum.is(['key1', 'key2'], 1)
-// 输出 true
+// 通过 value 获取 record
+myEnum.get("key1");
 
+// 通过 options
+myEnum.getOptions();
+
+// 获取列表
+myEnum.getList();
+
+// 判断 key 是否存在
+myEnum.has("key1");
+
+// 判断 value 是否存在
+myEnum.has(1);
+
+// 对比
+myEnum.is(1, "key1");
+
+// 对比多个
+myEnum.is([1, 2, 3], "key1");
+```
+
+### 自定义字段名
+
+```js
+import XYEnum from "xy-enum";
+
+const myEnum = new XYEnum(
+  [
+    { key: "key1", value: 1, desc: "选项1" },
+    { key: "key2", value: 2, desc: "选项2" },
+    { key: "key3", value: 3, desc: "选项3" },
+    { key: "key4", value: 4, desc: "选项4" }
+  ]);
+
+const options = myEnum.getOptions({
+  id: "value",
+  title: "desc"
+});
+
+console.log(options)
+// 输出
+[
+  { id: 1, title: "选项1" },
+  { id: 2, title: "选项2" },
+  { id: 3, title: "选项3" },
+  { id: 4, title: "选项4" }
+];
 ```
 
 ## API
-| 名称 | 必填 | 说明 |
-|:----|:----|:----|
-| fieldNames | 否 | 替换 Enum 中 key,value,desc 字段为 Enum 对应的字段，默认：{key: 'key', value: 'value', desc: 'desc'} |
+
+### 参数
+
+| 名称   | 说明   | 默认值 |
+|------|------|-----|
+| data | 枚举数据 | `-` |
+
+### 方法
+
+**创建实例**
+
+new XYEnum(data[, options])
+
+**实例方法**
+
+instance.get(content)
+
+instance.getKey(content)
+
+instance.getValue(content)
+
+instance.getDesc(content)
+
+instance.getOptions([config])
+
+instance.getList()
+
+instance.is(content, target)
+
+instance.has(content)
