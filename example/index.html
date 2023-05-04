@@ -14,6 +14,8 @@
         <button id="getRecord">获取对象</button>
         <button id="getOptions">获取用于 select、radio、checkbox 的列表项</button>
         <button id="getList">获取列表</button>
+        <button id="has">has</button>
+        <button id="is">is</button>
 
         <h2>自定义字段名</h2>
         <button id="customSet">设置 enum</button>
@@ -49,8 +51,8 @@
                     // 通过 value 获取desc
                     const desc2 = myEnum.getDesc(1)
 
-                    console.log('通过 key 获取到的 desc', desc1)
-                    console.log('通过 value 获取到的 desc', desc2)
+                    console.log(`通过 key 获取到的 desc： ${desc1}`)
+                    console.log(`通过 value 获取到的 desc： ${desc2}`)
                 })
 
                 // 获取对象
@@ -60,8 +62,8 @@
                     // 通过 value 获取 record
                     const record2 = myEnum.get(1)
 
-                    console.log('通过 key 获取到的 record', record1)
-                    console.log('通过 value 获取到的 record', record2)
+                    console.log(`通过 key 获取到的 record： ${record1}`)
+                    console.log(`通过 value 获取到的 record：${record2}`)
                 })
 
                 // 获取列表项
@@ -75,26 +77,34 @@
                     const list = myEnum.getList()
                     console.log(list)
                 })
+
+                // 是否存在
+                document.getElementById('has').addEventListener('click', function () {
+                    console.log(`通过 value 判断：${myEnum.has(1)}`)
+                    console.log(`通过 key 判断 ${myEnum.has('option1')}`)
+                })
+
+                // 是否相等
+                document.getElementById('is').addEventListener('click', function () {
+                    console.log(`通过 value 判断：${myEnum.is(1, 'option1')}`)
+                    console.log(`通过 key 判断 ${myEnum.is('option1', 1)}`)
+                    console.log(`通过多个判断 ${myEnum.is([2, 3, 4, 5], 'option1')}`)
+                })
             })
 
             // 自定义字段名
             document.getElementById('customSet').addEventListener('click', function () {
-                const myEnum = new XYEnum(
-                    [
-                        { key: 'custom1', id: 1, name: '自定义选项1' },
-                        { key: 'custom2', id: 2, name: '自定义选项2' },
-                        { key: 'custom3', id: 3, name: '自定义选项3' },
-                        { key: 'custom4', id: 4, name: '自定义选项4' },
-                    ],
-                    {
-                        fieldNames: { key: 'key', value: 'id', desc: 'name' },
-                    }
-                )
+                const myEnum = new XYEnum([
+                    { key: 'custom1', value: 1, desc: '自定义选项1' },
+                    { key: 'custom2', value: 2, desc: '自定义选项2' },
+                    { key: 'custom3', value: 3, desc: '自定义选项3' },
+                    { key: 'custom4', value: 4, desc: '自定义选项4' },
+                ])
 
                 document.getElementById('customGetOptions').addEventListener('click', function () {
                     const options = myEnum.getOptions({
-                        title: 'name',
-                        value: 'id',
+                        title: 'desc',
+                        id: 'value',
                     })
                     console.log(options)
                 })
