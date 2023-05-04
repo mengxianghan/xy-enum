@@ -4,27 +4,6 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.XYEnum = factory());
 })(this, (function () { 'use strict';
 
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      enumerableOnly && (symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      })), keys.push.apply(keys, symbols);
-    }
-    return keys;
-  }
-  function _objectSpread2(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = null != arguments[i] ? arguments[i] : {};
-      i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-    return target;
-  }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -46,20 +25,6 @@
       writable: false
     });
     return Constructor;
-  }
-  function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-    return obj;
   }
   function _toPrimitive(input, hint) {
     if (typeof input !== "object" || input === null) return input;
@@ -125,26 +90,14 @@
     return val === null || val === undefined || val === '';
   };
 
-  var _opts = /*#__PURE__*/new WeakMap();
   var _list = /*#__PURE__*/new WeakMap();
   var Enum = /*#__PURE__*/function () {
     function Enum(data, options) {
       _classCallCheck(this, Enum);
-      _classPrivateFieldInitSpec(this, _opts, {
-        writable: true,
-        value: void 0
-      });
       _classPrivateFieldInitSpec(this, _list, {
         writable: true,
         value: void 0
       });
-      _classPrivateFieldSet(this, _opts, _objectSpread2({
-        fieldNames: {
-          key: 'key',
-          value: 'value',
-          desc: 'desc'
-        }
-      }, options));
       _classPrivateFieldSet(this, _list, data);
     }
 
@@ -155,9 +108,8 @@
     _createClass(Enum, [{
       key: "get",
       value: function get(val) {
-        var _this = this;
         return _classPrivateFieldGet(this, _list).find(function (item) {
-          return item[_classPrivateFieldGet(_this, _opts).fieldNames.key] === val || item[_classPrivateFieldGet(_this, _opts).fieldNames.value] === val;
+          return (item === null || item === void 0 ? void 0 : item.key) === val || (item === null || item === void 0 ? void 0 : item.value) === val;
         });
       }
 
@@ -170,9 +122,9 @@
     }, {
       key: "getKey",
       value: function getKey(val) {
-        var _this$get, _classPrivateFieldGet2;
+        var _this$get;
         var def = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-        var content = (_this$get = this.get(val)) === null || _this$get === void 0 ? void 0 : _this$get[(_classPrivateFieldGet2 = _classPrivateFieldGet(this, _opts).fieldNames) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.key];
+        var content = (_this$get = this.get(val)) === null || _this$get === void 0 ? void 0 : _this$get.key;
         return !isEmpty(content) ? content : def;
       }
 
@@ -185,9 +137,9 @@
     }, {
       key: "getValue",
       value: function getValue(val) {
-        var _this$get2, _classPrivateFieldGet3;
+        var _this$get2;
         var def = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-        var content = (_this$get2 = this.get(val)) === null || _this$get2 === void 0 ? void 0 : _this$get2[(_classPrivateFieldGet3 = _classPrivateFieldGet(this, _opts).fieldNames) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.value];
+        var content = (_this$get2 = this.get(val)) === null || _this$get2 === void 0 ? void 0 : _this$get2.value;
         return !isEmpty(content) ? content : def;
       }
 
@@ -200,9 +152,9 @@
     }, {
       key: "getDesc",
       value: function getDesc(val) {
-        var _this$get3, _classPrivateFieldGet4;
+        var _this$get3;
         var def = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-        var content = (_this$get3 = this.get(val)) === null || _this$get3 === void 0 ? void 0 : _this$get3[(_classPrivateFieldGet4 = _classPrivateFieldGet(this, _opts).fieldNames) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.desc];
+        var content = (_this$get3 = this.get(val)) === null || _this$get3 === void 0 ? void 0 : _this$get3.desc;
         return !isEmpty(content) ? content : def;
       }
 
@@ -216,10 +168,9 @@
     }, {
       key: "getOptions",
       value: function getOptions() {
-        var _classPrivateFieldGet5, _classPrivateFieldGet6;
         var fieldNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-          label: (_classPrivateFieldGet5 = _classPrivateFieldGet(this, _opts).fieldNames) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.desc,
-          value: (_classPrivateFieldGet6 = _classPrivateFieldGet(this, _opts).fieldNames) === null || _classPrivateFieldGet6 === void 0 ? void 0 : _classPrivateFieldGet6.value
+          label: 'desc',
+          value: 'value'
         };
         var keys = Object.keys(fieldNames);
         return _classPrivateFieldGet(this, _list).map(function (item) {
@@ -248,10 +199,8 @@
     }, {
       key: "has",
       value: function has(val) {
-        var _this2 = this;
         return _classPrivateFieldGet(this, _list).some(function (item) {
-          var _classPrivateFieldGet7, _classPrivateFieldGet8, _classPrivateFieldGet9;
-          return item[(_classPrivateFieldGet7 = _classPrivateFieldGet(_this2, _opts).fieldNames) === null || _classPrivateFieldGet7 === void 0 ? void 0 : _classPrivateFieldGet7[(_classPrivateFieldGet8 = _classPrivateFieldGet(_this2, _opts).fieldNames) === null || _classPrivateFieldGet8 === void 0 ? void 0 : _classPrivateFieldGet8.key]] === val || item[(_classPrivateFieldGet9 = _classPrivateFieldGet(_this2, _opts).fieldNames) === null || _classPrivateFieldGet9 === void 0 ? void 0 : _classPrivateFieldGet9.value] === val;
+          return (item === null || item === void 0 ? void 0 : item.key) === val || (item === null || item === void 0 ? void 0 : item.value) === val;
         });
       }
 
@@ -263,11 +212,11 @@
     }, {
       key: "is",
       value: function is(val, value) {
-        var _this3 = this;
+        var _this = this;
         var list = [];
         if (Array.isArray(val)) {
           val.forEach(function (item) {
-            list.push.apply(list, [_this3.getKey(item), _this3.getValue(item)]);
+            list.push.apply(list, [_this.getKey(item), _this.getValue(item)]);
           });
         } else {
           list.push.apply(list, [this.getKey(val), this.getValue(val)]);

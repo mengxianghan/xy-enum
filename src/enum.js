@@ -1,19 +1,9 @@
 import { isEmpty } from './utils/is'
 
 export default class Enum {
-    #opts
     #list
 
     constructor(data, options) {
-        this.#opts = {
-            fieldNames: {
-                key: 'key',
-                value: 'value',
-                desc: 'desc',
-            },
-            ...options,
-        }
-
         this.#list = data
     }
 
@@ -22,9 +12,7 @@ export default class Enum {
      * @param {string|number} val
      */
     get(val) {
-        return this.#list.find(
-            (item) => item[this.#opts.fieldNames.key] === val || item[this.#opts.fieldNames.value] === val
-        )
+        return this.#list.find((item) => item?.key === val || item?.value === val)
     }
 
     /**
@@ -34,7 +22,7 @@ export default class Enum {
      * @return {*}
      */
     getKey(val, def = null) {
-        const content = this.get(val)?.[this.#opts.fieldNames?.key]
+        const content = this.get(val)?.key
         return !isEmpty(content) ? content : def
     }
 
@@ -45,7 +33,7 @@ export default class Enum {
      * @return {*}
      */
     getValue(val, def = null) {
-        const content = this.get(val)?.[this.#opts.fieldNames?.value]
+        const content = this.get(val)?.value
         return !isEmpty(content) ? content : def
     }
 
@@ -56,7 +44,7 @@ export default class Enum {
      * @return {*}
      */
     getDesc(val, def = null) {
-        const content = this.get(val)?.[this.#opts.fieldNames?.desc]
+        const content = this.get(val)?.desc
         return !isEmpty(content) ? content : def
     }
 
@@ -67,7 +55,7 @@ export default class Enum {
      * @param {string} fieldNames.label
      * @param {string} fieldNames.value
      */
-    getOptions(fieldNames = { label: this.#opts.fieldNames?.desc, value: this.#opts.fieldNames?.value }) {
+    getOptions(fieldNames = { label: 'desc', value: 'value' }) {
         const keys = Object.keys(fieldNames)
         return this.#list.map((item) => {
             const record = {}
@@ -90,11 +78,7 @@ export default class Enum {
      * @params {string|number} val
      */
     has(val) {
-        return this.#list.some(
-            (item) =>
-                item[this.#opts.fieldNames?.[this.#opts.fieldNames?.key]] === val ||
-                item[this.#opts.fieldNames?.value] === val
-        )
+        return this.#list.some((item) => item?.key === val || item?.value === val)
     }
 
     /**
