@@ -30,10 +30,10 @@ const myEnum = new XYEnum([
 ]);
 
 // 通过 value 获取 key
-myEnum.getKey("key1");
+myEnum.getKey(1);
 
 // 通过 key 获取 value
-myEnum.getValue(1);
+myEnum.getValue('key1');
 
 // 通过 key 获取 desc
 myEnum.getDesc("key1");
@@ -95,29 +95,30 @@ const options = myEnum.getOptions({
 
 #### Data
 
-以下三个字段为必填项，其他字段根据实际业务场景定义
+以下三个字段为必填项
 
 | 名称    | 说明                            | 类型                |
 |-------|-------------------------------|-------------------|
-| key   | 通过 key，可以获取对应数据               | `number`、`string` |
-| value | 通过 value，可以获取对应数据             | `number`、`string` |
-| desc  | 描述，在 getOptions 中会作为 label 返回 | `number`、`string` |
-| ...   | ...                           | ...               |
+| key   | 通过 key 可以获取对应数据               | `number` `string` |
+| value | 通过 value 可以获取对应数据             | `number` `string` |
+| desc  | 描述，在 getOptions 中会作为 label 返回 | `number` `string` |
+| ...   | 其他字段根据实际业务场景定义                | ...               |
 
 ### 方法
 
-instance.get(content)
+get(val)
 
-instance.getKey(content)
+getKey(val)
 
-instance.getValue(content)
+getValue(val)
 
-instance.getDesc(content)
+getDesc(val)
 
-instance.getOptions([config])
+getOptions([config])
 
-instance.getList()
+getList()
 
-instance.is(content, target)
+is(val1, val2)
 
-instance.has(content)
+has(val)
+
