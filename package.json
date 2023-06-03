@@ -1,10 +1,11 @@
 {
     "name": "xy-enum",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "枚举",
     "main": "src/index.js",
     "browser": "dist/index.min.js",
     "module": "dist/es/index.js",
+    "type": "module",
     "scripts": {
         "dev": "rollup -c --watch",
         "build": "rollup -c",
