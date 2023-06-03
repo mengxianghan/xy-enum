@@ -1,4 +1,4 @@
-import { isEmpty } from './utils/is'
+import { isEmpty } from './utils/is.js'
 
 export default class Enum {
     #list

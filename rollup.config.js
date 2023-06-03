@@ -9,11 +9,11 @@ export default {
     output: [
         {
             file: 'dist/es/index.js',
-            format: 'esm',
+            format: 'es',
         },
         {
             file: 'dist/es/index.min.js',
-            format: 'esm',
+            format: 'es',
             plugins: [terser()],
         },
         {

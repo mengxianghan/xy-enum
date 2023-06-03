@@ -1,8 +1,8 @@
 {
     "name": "xy-enum",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "description": "枚举",
-    "main": "src/index.js",
+    "main": "dist/index.js",
     "browser": "dist/index.min.js",
     "module": "dist/es/index.js",
     "type": "module",
