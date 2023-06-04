@@ -5,7 +5,6 @@
     "main": "dist/index.js",
     "browser": "dist/index.min.js",
     "module": "dist/esm/index.js",
-    "type": "module",
     "scripts": {
         "dev": "rollup -c --watch",
         "build": "rollup -c",
