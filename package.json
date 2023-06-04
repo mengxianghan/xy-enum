@@ -1,6 +1,6 @@
 {
     "name": "xy-enum",
-    "version": "1.4.3",
+    "version": "1.4.4",
     "description": "枚举",
     "main": "dist/index.js",
     "browser": "dist/index.min.js",
