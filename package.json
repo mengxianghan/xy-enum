@@ -47,6 +47,7 @@
     "dev": "vite",
     "dev:watch": "rollup -c -w",
     "build": "rollup -c",
+    "test": "vitest",
     "prepare": "husky"
   },
   "publishConfig": {
@@ -84,5 +85,8 @@
       "eslint",
       "tsc -p tsconfig.json"
     ]
+  },
+  "dependencies": {
+    "vitest": "^4.0.7"
   }
 }
