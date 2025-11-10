@@ -160,31 +160,9 @@ class Enum {
 
     // 然后转换格式
     return result.map((item) => {
-      let value: EnumValue | undefined
-
-      // 如果指定的 valueField 存在且有值，使用它
-      if (valueField in item && item[valueField] !== undefined && item[valueField] !== null) {
-        value = item[valueField] as EnumValue | undefined
-      }
-      // 如果指定的 valueField 不存在或没有值，但有 value 字段，使用 value
-      else if ('value' in item && item.value !== undefined && item.value !== null) {
-        value = item.value
-      }
-      // 如果没有 value 字段，使用 key
-      else if ('key' in item) {
-        value = item.key
-      }
-      // 理论上不会走到这里，因为 validateItems 已经验证了 key 或 value 至少有一个存在
-      else {
-        throw new Error('数据项必须包含 key 或 value 字段')
-      }
-
-      // 获取 label 值
-      const label = item[labelField] as string
-
       return {
-        [labelField]: label,
-        [valueField]: value,
+        [labelField]: item.label,
+        [valueField]: item.value ?? item.key,
       } as unknown as T
     })
   }
@@ -197,24 +175,12 @@ class Enum {
     return this.#items.some(item => item.value === searchValue || item.key === searchValue)
   }
 
-  // /**
-  //  * 判断源数据中是否存在指定的多个 label 或 value
-  //  * @param searchValues 搜索值数组（自动匹配 label 或 value）
-  //  */
-  // includes(searchValues: EnumValue[]): boolean {
-  //   if (!Array.isArray(searchValues)) {
-  //     throw new TypeError('输入必须是数组')
-  //   }
-  //
-  //   return searchValues.every(value => this.has(value))
-  // }
-
   /**
-   * 判断源数据中指定的 label 或 value 是否相等
+   * 判断源数据中是否存在指定的多个 label 或 value
    * @param searchValues 搜索值数组（自动匹配 label 或 value）
    * @param value 需要判断的值
    */
-  isEqual(
+  includes(
     searchValues: EnumValue | EnumValue[],
     value: EnumValue | undefined,
   ): boolean {
