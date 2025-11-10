@@ -194,8 +194,8 @@ console.log(statusEnum.has(1)) // true
 console.log(statusEnum.has('deleted')) // true
 
 // 批量检查是否都存在（自动匹配，支持混合 value 和 key）
-console.log(statusEnum.isEqual([1, 0, 'reviewing'], 'enable')) // true
-console.log(statusEnum.isEqual([1, 0, 99]), 'reviewing') // false
+console.log(statusEnum.includes([1, 0, 'reviewing'], 'enable')) // true
+console.log(statusEnum.includes([1, 0, 99]), 'reviewing') // false
 ```
 
 ## API 文档
@@ -226,7 +226,7 @@ const statusEnum = createEnum([
 
 #### getList
 
-```typescript
+```
 getList(
   filter?: ((item: EnumItem) => boolean) | Partial<EnumItem>
 ): EnumItem[]
@@ -239,7 +239,7 @@ getList(
 
 #### get
 
-```typescript
+```
 get(
   searchValue: EnumStringOrNumber,
   defaultValue?: EnumItem
@@ -251,7 +251,7 @@ get(
 
 #### getLabel
 
-```typescript
+```
 getLabel(
   searchValue: EnumStringOrNumber,
   defaultValue?: EnumStringOrNumber
@@ -264,7 +264,7 @@ getLabel(
 
 #### getValue
 
-```typescript
+```
 getValue(
   searchValue: EnumStringOrNumber,
   defaultValue?: EnumStringOrNumber
@@ -277,7 +277,7 @@ getValue(
 
 #### getDesc
 
-```typescript
+```
 getDesc(searchValue: EnumStringOrNumber): EnumStringOrNumber | undefined
 ```
 
@@ -285,7 +285,7 @@ getDesc(searchValue: EnumStringOrNumber): EnumStringOrNumber | undefined
 
 #### has
 
-```typescript
+```
 has(searchValue: EnumStringOrNumber): boolean
 ```
 
@@ -293,15 +293,19 @@ has(searchValue: EnumStringOrNumber): boolean
 
 #### includes
 
-```typescript
-includes(searchValues: EnumStringOrNumber[]): boolean
+```
+includes(
+  searchValues: EnumStringOrNumber[],
+  value: EnumStringOrNumber
+): boolean
 ```
 
 - `searchValues`: 搜索值数组（自动匹配 key 或 value）
+- `value`: 值
 
 #### getOptions
 
-```typescript
+```
 getOptions<T extends Record<string, any> = { label: string, value: string }>(
   options?: {
     labelField?: keyof EnumItem
