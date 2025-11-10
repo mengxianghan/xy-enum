@@ -8,10 +8,4 @@ export default antfu(
     },
     typescript: true,
   },
-  {
-    files: ['example/**/*.{ts,html}'],
-    rules: {
-      'no-console': 'off',
-    },
-  },
 )
