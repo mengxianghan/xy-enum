@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "lib": ["ESNext", "DOM"],
-    "rootDir": "src",
+    "lib": ["es2017", "dom"],
+    "rootDir": ".",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
@@ -16,8 +16,7 @@
     "skipLibCheck": true
   },
   "include": [
-    "src/**/*.ts",
-    "example/**/*.ts"
+    "src/**/*",
   ],
   "exclude": [
     "node_modules",
