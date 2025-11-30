@@ -181,20 +181,30 @@ class Enum {
    * @param value 需要判断的值
    */
   includes(
-    searchValues: EnumValue | EnumValue[],
+    searchValues: EnumValue[],
     value: EnumValue | undefined,
   ): boolean {
     const set = new Set()
-    if (Array.isArray(searchValues)) {
-      searchValues.forEach((item) => {
-        set.add(this.getKey(item))
-        set.add(this.getValue(item))
-      })
-    }
-    else {
-      set.add(this.getKey(searchValues))
-      set.add(this.getValue(searchValues))
-    }
+    searchValues.forEach((item) => {
+      set.add(this.getKey(item))
+      set.add(this.getValue(item))
+    })
+
+    return [...set].includes(value)
+  }
+
+  /**
+   * 判断源数据中是否存在指定的 label 或 value
+   * @param searchValue 搜索值数组（自动匹配 label 或 value）
+   * @param value 需要判断的值
+   */
+  isEqual(
+    searchValue: EnumValue,
+    value: EnumValue | undefined,
+  ): boolean {
+    const set = new Set()
+    set.add(this.getKey(searchValue))
+    set.add(this.getValue(searchValue))
 
     return [...set].includes(value)
   }

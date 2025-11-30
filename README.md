@@ -196,6 +196,10 @@ console.log(statusEnum.has('deleted')) // true
 // 批量检查是否都存在（自动匹配，支持混合 value 和 key）
 console.log(statusEnum.includes([1, 0, 'reviewing'], 'enable')) // true
 console.log(statusEnum.includes([1, 0, 99]), 'reviewing') // false
+
+// 批量检查是否存在（自动匹配，支持混合 value 和 key）
+console.log(statusEnum.isEqual(1, 'enable')) // true
+console.log(statusEnum.isEqual(1, 'reviewing')) // false
 ```
 
 ## API 文档
@@ -241,7 +245,7 @@ getList(
 
 ```
 get(
-  searchValue: EnumStringOrNumber,
+  searchValue: EnumValue,
   defaultValue?: EnumItem
 ): EnumItem | undefined
 ```
@@ -253,9 +257,9 @@ get(
 
 ```
 getLabel(
-  searchValue: EnumStringOrNumber,
-  defaultValue?: EnumStringOrNumber
-): EnumStringOrNumber | undefined
+  searchValue: EnumValue,
+  defaultValue?: EnumValue
+): EnumValue | undefined
 ```
 
 - `searchValue`: 搜索值（自动匹配 key 或 value）
@@ -266,9 +270,9 @@ getLabel(
 
 ```
 getValue(
-  searchValue: EnumStringOrNumber,
-  defaultValue?: EnumStringOrNumber
-): EnumStringOrNumber | undefined
+  searchValue: EnumValue,
+  defaultValue?: EnumValue
+): EnumValue | undefined
 ```
 
 - `searchValue`: 搜索值（自动匹配 key 或 value）
@@ -278,7 +282,7 @@ getValue(
 #### getDesc
 
 ```
-getDesc(searchValue: EnumStringOrNumber): EnumStringOrNumber | undefined
+getDesc(searchValue: EnumValue): EnumValue | undefined
 ```
 
 - `searchValue`: 搜索值（自动匹配 key 或 value）
@@ -286,7 +290,7 @@ getDesc(searchValue: EnumStringOrNumber): EnumStringOrNumber | undefined
 #### has
 
 ```
-has(searchValue: EnumStringOrNumber): boolean
+has(searchValue: EnumValue): boolean
 ```
 
 - `searchValue`: 搜索值（自动匹配 key 或 value）
@@ -295,12 +299,24 @@ has(searchValue: EnumStringOrNumber): boolean
 
 ```
 includes(
-  searchValues: EnumStringOrNumber[],
-  value: EnumStringOrNumber
+  searchValues: EnumValue[],
+  value: EnumValue
 ): boolean
 ```
 
 - `searchValues`: 搜索值数组（自动匹配 key 或 value）
+- `value`: 值
+
+#### isEqual
+
+```
+isEqual(
+  searchValue: EnumValue,
+  value: EnumValue
+): boolean
+```
+
+- `searchValue`: 搜索值数组（自动匹配 key 或 value）
 - `value`: 值
 
 #### getOptions
@@ -329,8 +345,8 @@ getOptions<T extends Record<string, any> = { label: string, value: string }>(
 
 ```typescript
 type EnumItem
-  = | { label: string, key: EnumStringOrNumber, value?: EnumStringOrNumber, desc?: EnumStringOrNumber, [key: string]: any }
-    | { label: string, key?: EnumStringOrNumber, value: EnumStringOrNumber, desc?: EnumStringOrNumber, [key: string]: any }
+  = | { label: string, key: EnumValue, value?: EnumValue, desc?: EnumValue, [key: string]: any }
+    | { label: string, key?: EnumValue, value: EnumValue, desc?: EnumValue, [key: string]: any }
 ```
 
 - `label`: 必填，显示文本
@@ -347,6 +363,6 @@ type EnumItem
 import type {
   Enum,
   EnumItem,
-  EnumStringOrNumber
+  EnumValue
 } from 'xy-enum'
 ```

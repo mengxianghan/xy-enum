@@ -128,10 +128,19 @@ describe('has', () => {
 })
 
 describe('includes', () => {
-  it('检查多个 values 和 keys 是否都存在', () => {
+  it('前值包含后值', () => {
     expect(statusEnum.includes([1, 0, 'reviewing', 'man'], 'male')).toBeTruthy()
   })
-  it('检查多个 values 是否都存在', () => {
+  it('前值不包含后值', () => {
     expect(statusEnum.includes([1, 0, 99], 'reviewing')).toBeFalsy()
+  })
+})
+
+describe('isEqual', () => {
+  it('两值相等', () => {
+    expect(statusEnum.isEqual('man', 'male')).toBeTruthy()
+  })
+  it('两值不相等', () => {
+    expect(statusEnum.isEqual('man', 1)).toBeFalsy()
   })
 })
