@@ -1,7 +1,7 @@
 {
   "name": "xy-enum",
   "type": "module",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "枚举",
   "author": {
     "name": "mengxianghan",
@@ -44,6 +44,7 @@
     "dev": "rollup -c -w",
     "build": "rollup -c",
     "test": "vitest",
+    "release": "pnpm build && npm publish",
     "prepare": "husky"
   },
   "publishConfig": {
